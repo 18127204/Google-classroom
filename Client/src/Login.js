@@ -1,12 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Route} from 'react-router-dom'
+
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import { FacebookLoginButton } from "react-social-login-buttons";
+
 import './index.css'
 const Login = () => {
-    
+
     const [usernameReg, setUsernameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
+    let history = useNavigate();
+    const login = () => {
+        localStorage.setItem("accessToken", true)
+
+        history('/classes')
+    }
     return (
         <Form className="login-form">
             <FormGroup>
@@ -17,7 +25,7 @@ const Login = () => {
                 <Label>Password</Label>
                 <Input type="password" placeholder="Password" />
             </FormGroup>
-            <Button className="btn-lg btn-dark col-12" >
+            <Button className="btn-lg btn-dark col-12" onClick={login}>
                 Log in
             </Button>
             <div className="text-center pt-3">
