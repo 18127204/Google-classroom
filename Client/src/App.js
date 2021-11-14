@@ -11,14 +11,14 @@ const App = ()=> {
       <BrowserRouter>
         <div>
           <div className="header">
-            <NavLink exact activeClassName="active" to="/register">Register</NavLink>
-            <NavLink exact activeClassName="active" to="/login">Login</NavLink>
-            <NavLink exact activeClassName="active" to="/logout">Logout</NavLink>
+            <NavLink exact activeClassName="active" to="/register"></NavLink>
+            <NavLink exact activeClassName="active" to="/"></NavLink>
+            <NavLink exact activeClassName="active" to="/logout"></NavLink>
           </div>
           <div className="content">
             <Routes>
               <Route exact path="/register" element={<Register />}/>
-              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/" element={<Login />} />
               <Route exact path="/logout" element={<Logout />} />
             </Routes>
           </div>

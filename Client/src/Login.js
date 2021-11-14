@@ -1,49 +1,37 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom'
+import {Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import { FacebookLoginButton } from "react-social-login-buttons";
+import './index.css'
 const Login = () => {
     
     const [usernameReg, setUsernameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
-    const navigate =  useNavigate();
-    useEffect(() => {
-        if (localStorage.getItem('user-info')){
-            navigate.push("/add")
-        }
-    }, [])
-
-    const login = async () => {
-       console.warn(usernameReg,passwordReg)
-       let item = { usernameReg, passwordReg};
-       let result = await fetch("http://localhost:3000/login", {
-           method: 'POST',
-           headers: {
-               "Content-Type": "application/json", 
-               "Accept": "application/json"
-           },
-           body: JSON.stringify(item)
-       })
-       result = await result.json()
-       localStorage.setItem("user-info",JSON.stringify(result));
-       navigate.push('/add')
-        
-    }
     return (
-        <div>
-            Login<br /><br />
-            <div>
-                Username<br />
-                <input type="text"  
-                       onChange={(e)=> {setUsernameReg(e.target.value)}}/>
+        <Form className="login-form">
+            <FormGroup>
+                <Label>User</Label>
+                <Input type="input" placeholder="Username" />
+            </FormGroup>
+            <FormGroup>
+                <Label>Password</Label>
+                <Input type="password" placeholder="Password" />
+            </FormGroup>
+            <Button className="btn-lg btn-dark col-12" >
+                Log in
+            </Button>
+            <div className="text-center pt-3">
+                Or continue with your social account
             </div>
-
-            <div style={{ marginTop: 10 }}>
-                Password<br />
-                <input type="password" onChange={(e)=> {setPasswordReg(e.target.value)}}/>
-            </div><br />
-            <button onClick={login} className="btnlogin">Login</button>
-        </div>
+            <FacebookLoginButton className="mt-3 mb-3" />
+            <div className="text-center">
+                <a href="/sign-up">Sign up</a>
+                <span className="p-2">|</span>
+                <a href="/sign-up">Forgot Password</a>
+            </div>
+        
+        </Form>
       );
     
 }
-
 export default Login;
